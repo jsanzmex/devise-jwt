@@ -36,16 +36,10 @@ module Devise
       private
 
       def add_defaults(inspector)
-        #add_skip_sessions(inspector)
         add_mapping(inspector)
         add_revocation_strategy(inspector)
         add_dispatch_requests(inspector)
         add_revocation_requests(inspector)
-      end
-
-      def add_skip_sessions(inspector)
-        #puts "INSPECTOR MODEL JWT: #{inspector.model.jwt}"
-        #defaults[:skip_sessions] = inspector.model.jwt.skip_sessions
       end
 
       # :reek:FeatureEnvy

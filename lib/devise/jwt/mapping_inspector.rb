@@ -9,7 +9,6 @@ module Devise
       def initialize(scope)
         @scope = scope
         @mapping = Devise.mappings[scope]
-        puts "SKIP SESSIONS PRESENT: #{JWT.config.to_json}"
       end
 
       def skip_sessions?
@@ -51,7 +50,6 @@ module Devise
       end
 
       def formats
-        puts "#{JWT.config.request_formats}"
         JWT.config.request_formats[scope] || default_formats
       end
 
