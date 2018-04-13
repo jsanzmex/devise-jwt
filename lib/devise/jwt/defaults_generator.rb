@@ -16,6 +16,7 @@ module Devise
       def initialize
         @devise_mappings = Devise.mappings
         @defaults = {
+          skip_sessions: false,
           mappings: {},
           revocation_strategies: {},
           dispatch_requests: [],
@@ -35,10 +36,16 @@ module Devise
       private
 
       def add_defaults(inspector)
+        #add_skip_sessions(inspector)
         add_mapping(inspector)
         add_revocation_strategy(inspector)
         add_dispatch_requests(inspector)
         add_revocation_requests(inspector)
+      end
+
+      def add_skip_sessions(inspector)
+        #puts "INSPECTOR MODEL JWT: #{inspector.model.jwt}"
+        #defaults[:skip_sessions] = inspector.model.jwt.skip_sessions
       end
 
       # :reek:FeatureEnvy
@@ -61,6 +68,7 @@ module Devise
       end
 
       def add_sign_in_request(inspector)
+        puts "HAS INSPECTOR SESSION: #{inspector.session?}"
         return unless inspector.session?
         defaults[:dispatch_requests].push(*sign_in_requests(inspector))
       end

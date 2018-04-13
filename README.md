@@ -5,6 +5,8 @@
 [![Code Climate](https://codeclimate.com/github/waiting-for-dev/devise-jwt/badges/gpa.svg)](https://codeclimate.com/github/waiting-for-dev/devise-jwt)
 [![Test Coverage](https://codeclimate.com/github/waiting-for-dev/devise-jwt/badges/coverage.svg)](https://codeclimate.com/github/waiting-for-dev/devise-jwt/coverage)
 
+This version adds an extra configuration to skip sessions. This is desirable when JWT is used only for API authentication.
+
 `devise-jwt` is a [devise](https://github.com/plataformatec/devise) extension which uses [JWT](https://jwt.io/) tokens for user authentication. It follows [secure by default](https://en.wikipedia.org/wiki/Secure_by_default) principle.
 
 This gem is just a replacement for cookies when these can't be used. As
@@ -441,6 +443,14 @@ jwt.revocation_requests = [
 ```
 
 **Important**: You are encouraged to delimit your regular expression with `^` and `$` to avoid unintentional matches.
+
+#### skip_sessions 
+
+Use this in case you want to dispatch and revoke only custom requests (e.g. for an API), but mantain the database_authenticatable strategy for your rails app.
+
+```ruby
+jwt.skip_sessions = true
+```
 
 #### request_formats
 
