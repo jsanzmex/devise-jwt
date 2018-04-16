@@ -11,6 +11,10 @@ module Devise
         @mapping = Devise.mappings[scope]
       end
 
+      def skip_sessions?
+        JWT.config.skip_sessions
+      end
+
       def jwt?
         mapping.modules.member?(:jwt_authenticatable)
       end

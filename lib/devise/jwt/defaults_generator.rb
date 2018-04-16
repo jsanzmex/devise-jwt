@@ -16,6 +16,7 @@ module Devise
       def initialize
         @devise_mappings = Devise.mappings
         @defaults = {
+          skip_sessions: false,
           mappings: {},
           revocation_strategies: {},
           dispatch_requests: [],
@@ -61,17 +62,20 @@ module Devise
       end
 
       def add_sign_in_request(inspector)
-        return unless inspector.session?
+        return unless inspector.session? 
+        return if inspector.skip_sessions?
         defaults[:dispatch_requests].push(*sign_in_requests(inspector))
       end
 
       def add_registration_request(inspector)
         return unless inspector.registration?
+        return if inspector.skip_sessions?
         defaults[:dispatch_requests].push(*registration_requests(inspector))
       end
 
       def add_revocation_requests(inspector)
         return unless inspector.session?
+        return if inspector.skip_sessions?
         defaults[:revocation_requests].push(*sign_out_requests(inspector))
       end
 
