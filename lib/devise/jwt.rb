@@ -26,8 +26,6 @@ module Devise
   module JWT
     extend Dry::Configurable
 
-    puts "SOME SETTINGS WORK HAPPEN HERE"
-
     setting :skip_sessions, false
 
     setting(:secret) do |value|
